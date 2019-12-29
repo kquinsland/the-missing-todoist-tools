@@ -1,0 +1,213 @@
+##
+# Showcase task_create action
+##
+version: 1
+
+actions:
+  - name: example-task_create_0
+    action: task_create
+    enabled: Yes
+    description: >-
+      Creates two tasks with explicit due dates
+
+    items:
+      - content: "Some Sooner Main Task"
+        project:
+          name: "Inbox"
+          # id: 2238854217
+        due:
+          explicit:
+            to: '2020-09-01T15:00:00-0700'
+
+        # 4 is highest priority
+        priority: 4
+
+        # Whether the task’s sub-tasks are collapsed (where 1 is true and 0 is false).
+        collapsed: Yes
+
+        labels:
+          name:
+            - tmtdt
+
+        # Apply my default reminder settings for this task
+        auto_reminder: Yes
+
+        # When this option is enabled, the labels will be parsed from the task content and added to the task.
+        # In case the label doesnt’t exist, a new one will be created automagically :)
+        auto_parse_labels: yes
+
+        # Note, the label `@tmtdt` is specified right in the task title.
+        # This 'works' because `auto_parse_labels` is set to yes!
+        ##
+      - content: "Some Later Main Task @tmtdt"
+        project:
+          name: "Inbox"
+          #id: 2240560934
+        due:
+          explicit:
+            to: '2020-10-01'
+
+        priority: 4
+        auto_reminder: Yes
+        auto_parse_labels: yes
+
+  - name: example-task_create_1
+    action: task_create
+    enabled: Yes
+    description: >-
+      Creates task with NO due date
+
+    # The tasks(s) to be created.
+    items:
+      - content: "Some never Due Task"
+        project:
+          name: "^Inbox$"
+        due:
+          absent: Yes
+
+        labels:
+          name:
+            - tmtdt
+
+  - name: example-task_create_2
+    action: task_create
+    enabled: Yes
+    description: >-
+      Creates task with a re-occurring due date
+
+    items:
+      - content: "My Every Evening routine task @routine"
+        project:
+          name: "^Inbox$"
+        due:
+          # Note: this will be a 'floating' due date so the task will always track the local / client timezone!
+          literal: "every day at 9 pm"
+
+        labels:
+          name:
+            - tmtdt
+
+  - name: example-task_create_3
+    action: task_create
+    enabled: No
+    description: >-
+      Creates task with a relative date
+
+    items:
+      - content: "Some Task due after tomorrow"
+        project:
+          name: "^Inbox$"
+        due:
+          # This will create a task that's due the Day of Week (DoW) that's after tomorrow. This does *not* support
+          #   times. E.G.: If today is Wed, tomorrow is Thur. so the due date that is 'sent' to ToDoist
+          #   will be 'Friday'.
+          # Note: like the literal due date, this task will be considered floating
+          relative:
+             to: tomorrow
+             direction: after
+        labels:
+          name:
+            - tmtdt
+
+  - name: example-task_create_4
+    action: task_create
+    enabled: Yes
+    description: >-
+      Creates a parent task
+
+    items:
+      - content: "Some Parent Task"
+        project:
+          name: "^Inbox$"
+        due:
+          absent: yes
+        labels:
+          name:
+            - tmtdt
+
+  - name: example-task_create_5
+    action: task_create
+    enabled: Yes
+    description: >-
+      Creates several child tasks under the parent task to demonstrate the use of child_order
+
+    items:
+      - content: "Some Child Task (child_order: 8)"
+        project:
+          name: "^Inbox$"
+        due:
+          relative:
+            # Note: if today is a 'wednesday' then after wednesday will return the _next_ tuesday.
+            #   If you meant for a due date of after today (meaning: tomorrow, thursday) then use
+            #   the settings after today
+            ##
+            to: wednesday
+            direction: after
+            #to: today
+            #direction: after
+
+        labels:
+          name:
+            - tmtdt
+
+        parent_task:
+          # Note: This task should already exist in the same project as the task to be created. If a task could not be
+          #   resolved then the task will still be created, just not as a child task.
+          #
+          # If specifying by id, then the ID must be valid otherwise the ToDoist server will report an error!
+          name: 'Some Parent Task'
+
+        # The lower the number, the higher up in the list it will be
+        child_order: 8
+
+        section:
+          # Like with `parent_task` above, this section should already exist in the correct project. If not, the
+          #   section will be ignored and the task will be created in the parent project. If specifying by ID, ensure
+          #   that the ID exists or a server error will result!
+          name: a2cp section
+
+      - content: "The second Child Task (child_order: 1)"
+        project:
+          name: "^Inbox$"
+        due:
+          absent: Yes
+
+        labels:
+          name:
+            - tmtdt
+        parent_task:
+          name: 'Some Parent Task'
+
+        # Should be at the top ot the list
+        child_order: 1
+      - content: "The third Child Task (child_order: 1)"
+        project:
+          name: "^Inbox$"
+        due:
+          absent: Yes
+
+        labels:
+          name:
+            - tmtdt
+
+        parent_task:
+          name: 'Some Parent Task'
+
+        # When two 'tasks' have the same child_order, todoist 'solves' the conflict by task creation time
+        child_order: 1
+
+      - content: "The fourth Child Task (child_order: 15)"
+        project:
+          name: "^Inbox$"
+        due:
+          absent: Yes
+
+        labels:
+          name:
+            - tmtdt
+
+        parent_task:
+          name: 'Some Parent Task'
+
+        #The order of task. Defines the position of the task among all the tasks with the same parent_id
+        child_order: 15

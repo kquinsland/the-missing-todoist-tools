@@ -1,0 +1,112 @@
+##
+# Showcase project_create action
+##
+version: 1
+
+actions:
+  - name: example-project_create_0
+    action: project_create
+    enabled: Yes
+    description: >-
+      Creates a parent project to be used in later actions
+
+    projects:
+      - from:
+          name: "Some Test Project"
+        color: 46
+
+  - name: example-project_create_1
+    action: project_create
+    enabled: no
+    description: >-
+      Creates a parent and child project. Shows use of color and favorite options
+
+    projects:
+      - from:
+          name: "Some Test Project"
+        color: 46
+
+      - from:
+          name: "Some Test Child Project"
+        favorite: Yes
+        parent:
+          # could also be specified by 'id' if known
+          #id: 123456789
+          project: Some Test Project
+
+  - name: example-project_create_2
+    action: project_create
+    enabled: yes
+    description: >-
+      Creates a series of child projects with the child_order set
+
+    projects:
+      - from:
+          name: "Some Bottom Test Project"
+        parent:
+          project: Some Test Project
+        color: MONA_LISA # color #46
+        # ToDoist sorts projects from low to high. Bigger number -> closer to the bottom
+        child_order: 9
+      - from:
+          name: "Some Other Test Project 2"
+        parent:
+          project: Some Test Project
+        color: RED
+        child_order: 2
+      - from:
+          name: "Some Other Test Project 3"
+        parent:
+          project: Some Test Project
+        color: BLUE
+      - from:
+          name: "Some Other Test Project 4"
+        parent:
+          project: Some Test Project
+        color: BLUE
+        child_order: 4
+
+  - name: example-project_create-filters_0
+    action: project_create
+    enabled: Yes
+    description: >-
+      Creates a parent project to be used in later actions
+
+    projects:
+      - from:
+          name: "Garage Sale 🏚️💵"
+        favorite: yes
+
+  - name: example-project_create-filters_1
+    action: project_create
+    enabled: YES
+    description: >-
+      Demonstrate how projects can be created from filters. A new project will be created for every task that is under
+      the 'Garage Sale 🏚️💵' project. Each new project will be 'seeded' with a template and the originating task will
+      be deleted from `Garage Sale 🏚️💵`
+
+    projects:
+      - from:
+          filters:
+            - filter:
+                # Any task that...
+                task:
+                  content:
+                    match: "."
+                    option:
+                      delete: yes
+
+                projects:
+                  # ... is in this project
+                  name:
+                    match: 'Garage Sale 🏚️💵'
+
+        # New projects will be ROSE colored
+        color: ROSE
+        # And created as child projects of `Garage Sale 🏚️💵`
+        parent:
+          project: Garage Sale 🏚️💵
+
+        # 'seed' the project from the CSV template file
+        template:
+          file: ./templates/garage-sale.csv

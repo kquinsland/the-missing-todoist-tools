@@ -1,0 +1,15 @@
+# See: https://docs.docker.com/engine/reference/builder/#dockerignore-file
+##
+# Any/All pyc files need not apply!
+*.pyc
+
+# A few local dirs that don't need to make it to the image
+.git
+.vscode
+backups/*
+
+# Docs also dont need to make it to the image
+docs/*
+
+# And any/all venvs :)
+/venv/*

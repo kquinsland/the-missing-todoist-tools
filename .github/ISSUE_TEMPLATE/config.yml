@@ -1,0 +1,27 @@
+# See: https://docs.github.com/en/github/building-a-strong-community/about-issue-and-pull-request-templates
+# See: https://docs.github.com/en/github/building-a-strong-community/configuring-issue-templates-for-your-repository#configuring-the-template-chooser
+##
+# Require template
+blank_issues_enabled: false
+
+contact_links:
+  - name: I've identified a security issue
+    url: https://github.com/kquinsland/the-missing-todoist-tools/security/policy
+    about: Please consult the security policy for this repo
+
+  - name: Get help setting up Python (virtual)environment
+    url: https://www.google.com/search?q=how+to+python3+virtualenv
+    about: Common questions can usually be answered with common tutorials
+
+  - name: I have a question or need support
+    url: https://github.com/kquinsland/the-missing-todoist-tools#support
+    about: Check here for guidelines on support and where/how to get it
+
+  - name: Request a feature
+    url: https://github.com/kquinsland/the-missing-todoist-tools/issues/new?template=FEATURE_REQUEST.md
+    about: Open a new issue, use feature request template
+
+  - name: Report a bug
+    url: https://github.com/kquinsland/the-missing-todoist-tools/issues/new?template=BUG_REPORT.md
+    about: All issues tracked here.
+

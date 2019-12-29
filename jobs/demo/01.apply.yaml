@@ -1,0 +1,85 @@
+##
+# The actual demo which implements the two examples from readme:
+#
+# Apply the label `@at_work` to all tasks that:
+#   - are in the `Inbox` project
+#   - (and) have no label
+#   - (and) end in `at work` **or** `at the office`.
+#       - Remove the `at work` or `at the office`
+#       portion of the task when saving it with the labels
+#
+# For every task in the `GarageSale` project:
+#   - make a new project named after the task
+#       - locate the new project under the `GarageSale` project
+#   - 'Seed' the project with tasks from `sale-tasks.csv` file
+#   - delete the original task from `#GarageSale`
+#
+##
+version: 1
+
+actions:
+
+  - name: demo-apply-label
+    action: label_apply
+    enabled: Yes
+    description: >-
+      Apply work related tasks with the proper label
+
+    labels:
+      - "at_work"
+
+    filters:
+      - filter:
+          # Any task that...
+          task:
+            # ... ends in 'at work' or 'the office'
+            content:
+              match: '(at work$|at the office$)'
+              option:
+                # Task title will change from "do thing at the office" to "do thing" w/ the label @at_work
+                mutate: Yes
+
+          # *AND*
+          # ... has no labels
+          labels:
+            absent: Yes
+
+          # *AND*
+          # ... is in this project
+          projects:
+            name:
+              match: 'Inbox'
+
+          regex_options:
+            # Ignore case so tasks like 'do thing AT OFFICE' will also be included :)
+            - re.I
+
+  - name: demo-seed-projects
+    action: project_create
+    enabled: YES
+    description: >-
+      'Expands' tasks under 'Garage Sale 🏚️💵' project
+
+    projects:
+      - from:
+          filters:
+            - filter:
+                # Any task that...
+                task:
+                  content:
+                    match: "."
+                    option:
+                      delete: yes
+
+                projects:
+                  # ... is in this project
+                  name:
+                    match: 'Garage Sale 🏚️💵'
+
+        # And created as child projects of `Garage Sale 🏚️💵`
+        parent:
+          project: Garage Sale 🏚️💵
+
+        # 'seed' the project from the CSV template file
+        template:
+          file: ./templates/garage-sale.csv

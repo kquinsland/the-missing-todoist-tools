@@ -1,0 +1,4 @@
+##
+# Don't need pycache things
+__pycache__/*
+

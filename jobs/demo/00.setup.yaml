@@ -1,0 +1,54 @@
+##
+# Sets up a 'blank' ToDoist account for demo :)
+##
+version: 1
+
+actions:
+  - name: demo-setup-projects
+    action: project_create
+    enabled: Yes
+    description: >-
+      Creates Simple 'root' project
+
+    projects:
+      - from:
+          name: 'Garage Sale 🏚️💵'
+        color: PURPLE
+
+  - name: demo-setup-tasks-1
+    action: task_create
+    enabled: Yes
+    description: >-
+      Creates example tasks for our garage sale
+
+    items:
+      - content: "Old Lamp 🛋️"
+        project:
+          name: "Garage Sale 🏚️💵"
+      - content: "Kids Clothes"
+        project:
+          name: "Garage Sale 🏚️💵"
+      - content: "Old Exercise Equipment"
+        project:
+          name: "Garage Sale 🏚️💵"
+
+  - name: demo-setup-tasks
+    action: task_create
+    enabled: Yes
+    description: >-
+      Creates example tasks for our inbox
+
+    items:
+      - content: "Ask boss about a raise at work"
+      - content: "Practice big presentation at the office"
+
+  - name: demo-setup-labels
+    action: label_create
+    enabled: Yes
+    description: >-
+      Creates example labels for our inbox
+
+    labels:
+      - label: "at_work"
+        color: RED
+        favorite: Yes

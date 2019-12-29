@@ -1,0 +1,129 @@
+##
+# Showcase label_apply actions
+##
+version: 1
+
+actions:
+  - name: example-label_apply-at_work
+    action: label_apply
+    enabled: True
+    description: >-
+      Shows how to use the filter(s) object in TMTDT w/ the labels
+
+    labels:
+      - "at_work"
+      - "tmtdt"
+
+    filters:
+      - filter:
+          # Any task that...
+          task:
+            # ... ends in 'at work' or 'the office'
+            content:
+              match: '(at work$|at the office$)'
+              option:
+                # Task title will change from "do thing at the office" to "do thing" w/ the label @at_work
+                mutate: Yes
+
+          # *AND*
+          # ... is in this project
+          projects:
+            name:
+              match: 'Inbox'
+
+          regex_options:
+            # Ignore case so tasks like 'do thing AT OFFICE' will also be included :)
+            - re.I
+
+      - filter:
+          # Any task that...
+          task:
+            # ... has this in their title
+            content:
+              match: 'at \w+ other place'
+              option:
+                mutate: Yes
+
+
+  - name: example-label_apply-never_due
+    action: label_apply
+    enabled: Yes
+    description: >-
+      Labels all tasks with no due date in the #Inbox project as @low_priority
+
+    labels:
+      - "low_priority"
+      - "tmtdt"
+
+    filters:
+      - filter:
+          # Any task that has no due date...
+          task:
+            date:
+              absent: Yes
+
+          # *AND*
+          # ... is in this project
+          projects:
+            name:
+              match: 'Inbox'
+
+
+  - name: example-label_apply-over_due
+    action: label_apply
+    enabled: True
+    description: >-
+      Labels all tasks with no due date in the #Inbox project as @low_priority
+
+    labels:
+      - "high_priority"
+      - "tmtdt"
+
+    filters:
+      - filter:
+          # Any task that is overdue
+          task:
+            date:
+              relative:
+                to: today
+                # due BEFORE TODAY = overdue
+                direction: before
+
+
+  - name: example-label_apply-next_quarter_1
+    action: label_apply
+    enabled: True
+    description: >-
+      All tasks
+
+    labels:
+      - "next_quarter"
+      - "tmtdt"
+
+    filters:
+      - filter:
+          # Next quarter starts aug 1!
+          task:
+            date:
+              explicit:
+                # Can also include a time: '2020-08-18T14:27:00-0700'
+                to: '2020-08-01'
+                # after is *not* inclusive!
+                direction: after
+
+
+  - name: example-label_apply-next_quarter_2
+    action: label_apply
+    enabled: Yes
+    description: >-
+      All tasks that have the label `prj_next_quarter` will also get the label `next_quarter` and `tmtdt`
+
+    labels:
+      - "next_quarter"
+      - "tmtdt"
+
+    filters:
+      - filter:
+          labels:
+            name:
+              match: 'prj_next_quarter'

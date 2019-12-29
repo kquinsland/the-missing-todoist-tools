@@ -1,0 +1,85 @@
+##
+# Showcase task_delete action
+##
+version: 1
+
+actions:
+  - name: example-task_delete_0
+    action: task_delete
+    enabled: Yes
+    description: >-
+      Deletes the tasks created in example
+
+    items:
+      - from:
+          # This will fail, emit a warning in logs as there is no task with this ID in my account
+          id: 999999999
+      - from:
+          filter:
+            task:
+              content:
+                  # All projects were in the format "Some Child Task (child_order:8)" so
+                  #   searching for all tasks that have `(child_order: $NUMBER)` should
+                  #   do the trick!
+                  ##
+                match: '(child_order: \d)'
+
+
+  - name: example-task_delete_1
+    action: task_delete
+    enabled: Yes
+    description: >-
+      Deletes the parent and never due tasks
+
+    items:
+      - from:
+          filter:
+            task:
+              content:
+                match: '^Some Parent Task$'
+            project:
+              name:
+                match: '^Inbox$'
+      - from:
+          filter:
+            task:
+              # The task that i'm trying to delete here is literally titled 'Some never Due Task' and also has no due
+              #   date. To properly select the task, i'll search by the item.content, but could also search by tasks
+              #   that have no due date. Unfortunately, only one selector per 'component' is a limitation of TMTDT
+              #   that may be corrected in the future.
+              ##
+              content:
+                match: '^Some never Due Task$'
+              #date:
+              #  absent: Yes
+            labels:
+              name:
+                match: 'tmtdt'
+            project:
+              name:
+                match: '^Inbox$'
+
+  - name: example-task_delete_2
+    action: task_delete
+    enabled: Yes
+    description: >-
+      Deletes the routine task
+
+    items:
+      - from:
+          filter:
+            labels:
+              name:
+                # The auto_parse_labels was true and added
+                match: 'routine'
+            project:
+              name:
+                match: '^Inbox$'
+      - from:
+          filter:
+            task:
+              content:
+                match: 'Some \w+? Main Task'
+            project:
+              name:
+                match: '^Inbox$'

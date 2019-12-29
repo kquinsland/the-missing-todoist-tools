@@ -1,0 +1,48 @@
+name: Build Container Image On Push
+
+on:
+  push:
+    paths:
+      # Build and push any time Dockerfile is updated *or* main.py
+      - "Dockerfile"
+      - "tmtdt.py"
+
+  # Add manual trigger of actions
+  # See: https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
+  workflow_dispatch:
+
+jobs:
+  build_container_image:
+    runs-on: ubuntu-latest
+    steps:
+      # Pull the code onto the build host
+      - uses: actions/checkout@v1
+
+      - name: Update version.py
+        run: ./version-hook.sh
+
+      # Build the image
+      # Note the env-vars
+      # See: https://help.github.com/en/actions/automating-your-workflow-with-github-actions/using-environment-variables#default-environment-variables
+      - name: Build and tag image
+        run: docker build --build-arg GIT_COMMIT=$GITHUB_SHA --build-arg GIT_BRANCH=$GITHUB_REF --tag "docker.pkg.github.com/$GITHUB_REPOSITORY/tmtdt:latest" --file Dockerfile .
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: GPR Auth
+        # Authenticate to Github Packages Repo
+        run: docker login docker.pkg.github.com -u $GITHUB_ACTOR -p $GITHUB_TOKEN
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: GPR Push
+        # And attempt to push to github packages
+        run: docker push "docker.pkg.github.com/$GITHUB_REPOSITORY/tmtdt:latest"
+
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v1.1.0
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PERSONAL_TOKEN }}
+          repository: kquinsland/the-missing-todoist-tools
+          tags: latest

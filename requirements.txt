@@ -1,0 +1,24 @@
+# The official Python API from todoist
+# See: https://github.com/Doist/todoist-python
+todoist-python~=8.1.1
+
+# An improved version of pprint
+# See: https://pypi.org/project/prettyprinter/
+prettyprinter~=0.18.0
+
+# The jobs are YAML files
+pyyaml~=5.2
+
+# And we use voluptuous to validate them :)
+voluptuous~=0.11.7
+
+# Makes working with timezones less terrible!
+# See: https://pypi.org/project/python-dateutil/
+python-dateutil~=2.8.1
+
+# Add timezone support to python
+# See: http://pytz.sourceforge.net/#localized-times-and-date-arithmetic
+pytz~=2019.3
+
+# For downloading backup zip files from todoist
+requests~=2.22.0

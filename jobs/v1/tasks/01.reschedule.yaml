@@ -1,0 +1,153 @@
+##
+# Showcase task_reschedule action
+##
+version: 1
+
+actions:
+  - name: example-task_reschedule-0
+    action: task_reschedule
+    enabled: Yes
+    description: >-
+      Demonstrate use of reschedule to postpone
+
+    # Note: this has NO EFFECT on tasks with a due-date of None
+    # Adding *exactly* 1 Day is identical to postponing the task to 'tomorrow'
+    due:
+      delta:
+        days: +1
+
+    items:
+      - from:
+          # Will emit a warning if there is no task w/ this ID in your account
+          id: 99999999
+      - from:
+          filter:
+            task:
+              content:
+                match: 'My Every Evening routine task'
+            project:
+              name:
+                match: '^Inbox$'
+
+  - name: example-task_reschedule-1
+    action: task_reschedule
+    enabled: Yes
+    description: >-
+      Demonstrate use of reschedule to postpone
+
+    # Tasks can be rescheduled by any combination of the units of time.
+    due:
+      delta:
+        # Note: 367d - 24h - 1440m is a identical to +365d
+        days: +367
+        hours: -24
+        # 24h is 1440 min
+        minutes: -1440
+
+    items:
+      - from:
+          filter:
+            task:
+              content:
+                match: 'Some Sooner Main Task'
+            project:
+              name:
+                match: '^Inbox$'
+
+  - name: example-task_reschedule-2
+    action: task_reschedule
+    enabled: Yes
+    description: >-
+      Reschedule the task with no due date so it's now due weekly
+
+    due:
+      literal: "every fri"
+    items:
+      - from:
+          filter:
+            task:
+              content:
+                match: 'Some never Due Task'
+
+            project:
+              name:
+                match: '^Inbox$'
+
+            ##
+            # Additionally, ignore the case
+            # See: https://www.tutorialspoint.com/python/python_reg_expressions.htm
+            regex_options:
+              # Ignore Case
+              - re.I
+
+  - name: example-task_reschedule-3
+    action: task_reschedule
+    enabled: Yes
+    description: >-
+      Reschedule with a string
+
+    due:
+      relative:
+        # When using to: now, before/after add or subtract 1 minute.
+        # E.G.: if NOW is 2:45 PM, then after now = 2:43 PM and
+        #   before now = 2:44 PM
+        ##
+        to: now
+        direction: after
+
+    items:
+      - from:
+          filter:
+            task:
+              content:
+                # Note: escape the () when searching via regex!
+                match: 'The fourth Child Task \(child_order: 15\)'
+            labels:
+              name:
+                match: 'tmtdt'
+
+  - name: example-task_reschedule-4
+    action: task_reschedule
+    enabled: Yes
+    description: >-
+      Reschedule with a string
+
+    due:
+      # An explicit date/time, in Y-M-D or ISO8601 format (with no microseconds)
+      explicit:
+        #to: '2020-01-01'
+        to: '2020-10-31T14:27:00-0700'
+        # after is not inclusive
+        direction: after
+
+    items:
+      - from:
+          filter:
+            task:
+              content:
+                match: 'Some Child Task \(child_order: 8\)'
+
+            labels:
+              name:
+                match: 'tmtdt'
+
+
+  - name: example-task_reschedule-5
+    action: task_reschedule
+    enabled: Yes
+    description: >-
+      Removes the due date
+
+    due:
+      absent: yes
+
+    items:
+      - from:
+          filter:
+            task:
+              content:
+                match: 'The second Child Task \(child_order: 1\)'
+
+            labels:
+              name:
+                match: 'tmtdt'

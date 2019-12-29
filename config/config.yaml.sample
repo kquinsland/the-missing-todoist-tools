@@ -1,0 +1,26 @@
+##
+# ToDoist Tools Config File
+##
+todoist:
+  api:
+    # The API token to use; this is ALL that is required to grant FULL access to ToDoist! Protect this token as you
+    #   would protect a password!!!
+    #
+    # To help keep this sensitive value secret, consider using the value below which will dynamically load in the
+    #   API key via an environment variable at run time so you don't have to keep your API token stored in plain-text
+    #   in this config file!
+    #
+    #   token: ${TODOIST_API_TOKEN}
+    #
+    # You would then invoke like this:
+    #   $ TODOIST_API_TOKEN=1234...40 python3 main.py ...
+    ##
+    token: "40-characters-worth-of-api-token-goes-here"
+
+client:
+  # The timezone to use when evaluating if a task is over-due or not. This should be set to the users
+  #   preferred time zone.
+  #
+  # Note: must be one of the timezones listed here:
+  #   https://stackoverflow.com/questions/13866926/is-there-a-list-of-pytz-timezones
+  timezone: 'America/Los_Angeles'

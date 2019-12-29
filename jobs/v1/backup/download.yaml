@@ -1,0 +1,31 @@
+##
+# Showcase backup_download actions
+##
+version: 1
+
+actions:
+  - name: Downloads backup file by explicit date
+    action: backup_download
+    enabled: True
+    description: >-
+      Downlands the backup file created on 2020-07-15
+
+    filters:
+      - filter:
+          when: "2020-07-15"
+
+    options:
+      save_location: "./backups"
+
+  - name: Downloads today's backup file
+    action: backup_download
+    enabled: True
+    description: >-
+      Downlands the most recent backup file
+
+    filters:
+      - filter:
+          when: "today"
+
+    options:
+      save_location: "./backups"

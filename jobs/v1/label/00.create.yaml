@@ -1,0 +1,25 @@
+##
+# Showcase label_create actions
+##
+version: 1
+
+actions:
+  - name: demonstrate-label-creation
+    action: label_create
+    enabled: Yes
+    description: >-
+      Creates a few labels for all tasks to be done @ a few distinct places
+
+    labels:
+      - label: "simple_label"
+      - label: "at_work"
+        color: RED
+        favorite: Yes
+
+      - label: "at_store"
+        color: 46
+
+        # A label to indicate that tmtdt was here :)
+      - label: "tmtdt"
+        color: HIBISCUS
+        favorite: Yes

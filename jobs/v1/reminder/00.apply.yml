@@ -1,0 +1,80 @@
+##
+# Showcase reminder_apply action
+##
+version: 1
+
+actions:
+  - name: location-reminder-hacker_lab
+    action: reminder_apply
+    enabled: No
+    description: >-
+      Any task with the `@at_hl` label or any task that ends in `at hacker lab` will get a get a location base reminder
+      applied to it
+
+    reminders:
+      - type: location
+        service: push
+        where:
+          name: Hacker Lab
+          latitude: 38.566112
+          longitude: -121.475908
+          trigger: on_enter
+          radius: 50
+
+    filters:
+      - filter:
+          # Any task that has the @at_hl label
+          labels:
+            name:
+              match: "at_hl"
+              option:
+                mutate: No
+
+      - filter:
+          task:
+            content:
+              # Any task that has a title ending in 'at hacker lab'
+              match: "at hacker lab$"
+              option:
+                # remove the matching portion of the task title
+                mutate: Yes
+
+
+  - name: absolute-reminder-team_lunch
+    action: reminder_apply
+    enabled: No
+    description: >-
+      Email notification for all tasks that need to be done before next team lunch!
+
+    reminders:
+      - type: absolute
+        service: email
+        # The next team lunch is monday 07/20 at noon, reminder 15m before
+        when: "2020-07-20T11:45:00-07:00"
+
+    filters:
+      - filter:
+          task:
+            content:
+              match: "before team lunch$"
+              option:
+                mutate: Yes
+
+  - name: relative-reminder-weely_coming
+    action: reminder_apply
+    enabled: Yes
+    description: >-
+      any task that's due after monday should email me 4 hours before it's due
+
+    reminders:
+      - type: relative
+        service: email
+        minutes: 240 # 4 hours is 240m
+
+    filters:
+      - filter:
+          task:
+            date:
+              relative:
+                direction: after
+                to: monday

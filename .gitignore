@@ -1,0 +1,15 @@
+##
+# Don't need pycharm
+.idea/*
+
+# Nor do we need venv
+venv/*
+
+# Nor do we need the todoist token/credentials
+config/config.yaml
+
+# Nor do we need log files
+*.log
+
+# Nor do we need any backup files
+backups/*

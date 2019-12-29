@@ -1,0 +1,50 @@
+##
+# Cleans up after the setup / apply:
+#   - deletes tasks in the Inbox with the label @at_work
+#   - deletes the `Garage Sale 🏚️💵` Project (which deletes all child projects/tasks)
+##
+version: 1
+
+actions:
+  - name: demo-clean-project
+    action: project_delete
+    enabled: Yes
+    description: >-
+      Cleans up the example Garage Sale project from demo
+
+    projects:
+      - from:
+          filters:
+           - filter:
+              projects:
+                name:
+                  match: '^Garage Sale 🏚️💵$'
+
+  - name: demo-clean-tasks
+    action: task_delete
+    enabled: Yes
+    description: >-
+      Cleans up at_work tasks in Inbox from demo
+
+    items:
+      - from:
+          filter:
+            labels:
+              name:
+                match: '^at_work$'
+            project:
+              name:
+                match: '^Inbox$'
+
+  - name: demo-clean-labels
+    action: label_delete
+    enabled: Yes
+    description: >-
+      Removes demo label
+    labels:
+      - from:
+          filters:
+           - filter:
+              labels:
+                name:
+                  match: '^at_work$'

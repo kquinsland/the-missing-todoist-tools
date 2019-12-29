@@ -1,0 +1,34 @@
+##
+# Showcase label_create actions
+##
+version: 1
+
+actions:
+  - name: example-label_delete
+    action: label_delete
+    enabled: Yes
+    description: >-
+      Removes a label by explicit ID number and all labels that begin with test_* and the specific
+      label for at_work
+
+    labels:
+      - from:
+          # If you knew that the label `simple_label` had ID: 2154807380, then this would work
+          # id: 2154807380
+          filter:
+            labels:
+              name:
+                match: 'simple_label'
+      - from:
+          filter:
+            labels:
+              name:
+                match: '^at_(work|store)$'
+          options:
+            regex_flags:
+              - re.I
+      - from:
+          filter:
+            labels:
+              name:
+                match: '^tmtdt$'

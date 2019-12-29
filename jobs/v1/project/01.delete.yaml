@@ -1,0 +1,22 @@
+##
+# Showcase project_delete action
+##
+version: 1
+
+actions:
+  - name: remove the test projects
+    action: project_delete
+    enabled: Yes
+    description: >-
+      Removes the at_some_place label from my ToDoist Account.
+
+    projects:
+      - from:
+          # Supports specific ID
+          # id: 2239209310
+          filters:
+           - filter:
+              projects:
+                name:
+                  # Will match `Some Other $WORD Project $NUMBER'
+                  match: 'Some Other (\w*) Project \d$'
