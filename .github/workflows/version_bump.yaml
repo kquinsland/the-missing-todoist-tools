@@ -1,0 +1,28 @@
+##
+# Every time there's a commit, update the version.py file.
+# When a new release is cut, determine the new version number, create a new tag and then
+#   update the version.py file
+##
+
+name: version_py-bump
+on:
+  push:
+    branches:
+      - master
+      - release/*
+      - patch/*
+jobs:
+  version_bump:
+    runs-on: ubuntu-latest
+    steps:
+      # See: https://github.com/marketplace/actions/github-tag-bump
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: "0"
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.17.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          # Comma separated list of branches (bash reg exp accepted) that will generate the release tags.
+          RELEASE_BRANCHES: release/*,patch/*,master
