@@ -19,4 +19,4 @@ At a minimum, each item in the `projects:` field must have:
 
 ### Examples
 
-See the [jobs/project/02.delete.yaml](../../../jobs/v1/project/02.delete.yaml) file for more.
+See the [jobs/project/01.delete.yaml](../../../jobs/v1/project/01.delete.yaml) file for more.
