@@ -8,7 +8,6 @@ name: version_py-bump
 on:
   push:
     branches:
-      - master
       - release/*
       - patch/*
 jobs:
@@ -23,6 +22,9 @@ jobs:
         uses: anothrNick/github-tag-action@1.17.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # prefix version with v
           WITH_V: true
+          # Auto increment the Patch level
+          DEFAULT_BUMP: patch
           # Comma separated list of branches (bash reg exp accepted) that will generate the release tags.
-          RELEASE_BRANCHES: release/*,patch/*,master
+          RELEASE_BRANCHES: release/*,patch/*
