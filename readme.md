@@ -18,9 +18,7 @@ of Inbox triage and general task management.
 
 ## Examples
 
-![Screencast showing ToDoist Inbox transformed by demonstration of TMTDT](/docs/res/demo/01/demo.gif)
-
-If you squint 🔍, you can see the examples below working to cleanup an Inbox.
+Configurations that do things like:
 
 > Apply the label `@at_work` to all tasks that:
 >   - are in the `Inbox` project
@@ -37,7 +35,11 @@ Or
 >   - 'Seed' the project with tasks from `sale-tasks.csv` file
 >   - delete the original task from `#GarageSale`
 
-And *so* much more.
+And *so* much more become possible.
+
+![Screencast showing ToDoist Inbox transformed by demonstration of TMTDT](/docs/res/demo/01/demo.gif)
+
+If you squint 🔍, you can see the examples outlined above actually being used to cleanup an Inbox.
 
 If the above GIF wasn't helpful, you can see the exact `jobs`file [from the demo](/jobs/demo/01.apply.yaml).
 
