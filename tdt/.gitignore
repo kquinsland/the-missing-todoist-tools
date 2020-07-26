@@ -1,1 +1,4 @@
 /*__pycache__/*
+
+# We don't track the version.py file as it'll be updated automatically every release
+version.py
