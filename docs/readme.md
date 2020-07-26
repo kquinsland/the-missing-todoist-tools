@@ -52,7 +52,7 @@ As of now, there are three major `components` that have some `properties` that c
 
 - Items: Under the hood, ToDoist refers to individual tasks as 'items'.
   - content: search through the title of a given task. Supports regex.
-  - date: several different ways to search by task due date. See [dates](#markdown-header-dates) for more
+  - date: several different ways to search by task due date. See [dates](#taskdate) for more
 
 - Labels
   - name: Identical to `Items.content` but for labels. Supports regex.

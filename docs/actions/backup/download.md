@@ -41,11 +41,8 @@ Supports chaining.
 Details are in the [`validators/job_file`](../../../tdt/validators/job_file/backup/basic.py) directory
 
 
-- `when`: Either an explicit date in the format of `2020-07-15` for which there is a backup or a relative string for which the appropriate **past** date
- will be calculated. As future backups can't be downloaded in the present, the `tomorrow` value is not supported.
- See the [`filters/when`](../../filters/when.md) document. 
+- `when`: Either an explicit date in the format of `2020-07-15` for which there is a backup or a relative string for which the appropriate **past** date will be calculated. As future backups can't be downloaded in the present, the `tomorrow` value is not supported. See the [`filters/when`](/docs/readme.md#taskdate) document.
  
 
 #### Options:
 - `backup`: Path to a **directory** where the backup zip file from ToDoist will be saved.
- 
