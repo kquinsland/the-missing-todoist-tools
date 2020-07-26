@@ -13,7 +13,7 @@ There are two fields that drive this action:
 - `labels`: a list of labels to apply. Currently, specifying labels by ID is not supported. The label must already 
 exist if it is to be applied. Missing labels will be skipped with a WARNING in the logs.
     
-- `filters`: a list of filters that find tasks(s) to receive the labels. See the dedicated [filters](../../filters/readme.md) documentation for details
+- `filters`: a list of filters that find tasks(s) to receive the labels. See the dedicated [filters](../../readme.md#filters) documentation for details
 
 ### Examples
 
