@@ -37,9 +37,9 @@ Or
 
 And *so* much more become possible.
 
-![Screencast showing ToDoist Inbox transformed by demonstration of TMTDT](/docs/res/demo/01/demo.gif)
+If you squint 🔍, you can see the examples outlined above actually being used to cleanup an Inbox in the screencast:
 
-If you squint 🔍, you can see the examples outlined above actually being used to cleanup an Inbox.
+![Screencast showing ToDoist Inbox transformed by demonstration of TMTDT](/docs/res/demo/01/demo.gif)
 
 If the above GIF wasn't helpful, you can see the exact `jobs`file [from the demo](/jobs/demo/01.apply.yaml).
 
