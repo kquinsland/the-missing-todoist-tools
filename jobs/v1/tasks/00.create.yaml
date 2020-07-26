@@ -17,19 +17,20 @@ actions:
           # id: 2238854217
         due:
           explicit:
-            to: '2020-09-01T15:00:00-0700'
+            to: "2020-09-01T15:00:00-0700"
 
         # 4 is highest priority
         priority: 4
 
-        # Whether the task’s sub-tasks are collapsed (where 1 is true and 0 is false).
+        # Don't want to see sub tasks (if any) in task list by default
         collapsed: Yes
 
         labels:
           name:
             - tmtdt
 
-        # Apply my default reminder settings for this task
+        # Apply my default reminder settings for this task so i don't need to use the `reminder_apply` action
+        #   later in this job file to get a reminder on the task
         auto_reminder: Yes
 
         # When this option is enabled, the labels will be parsed from the task content and added to the task.
@@ -45,7 +46,7 @@ actions:
           #id: 2240560934
         due:
           explicit:
-            to: '2020-10-01'
+            to: "2020-10-01"
 
         priority: 4
         auto_reminder: Yes
@@ -61,6 +62,9 @@ actions:
     items:
       - content: "Some never Due Task"
         project:
+          # Couch the name in ^<query>$ to make it a *literal* search for _only_ <query>
+          # This only works because I have *one* project with the name `Inbox`. If I had multiple projects with
+          # the _exact same name_ then my only option would be to use the `id:` field!
           name: "^Inbox$"
         due:
           absent: Yes
@@ -76,6 +80,7 @@ actions:
       Creates task with a re-occurring due date
 
     items:
+      # The label `routine` will be auto created/applied
       - content: "My Every Evening routine task @routine"
         project:
           name: "^Inbox$"
@@ -103,8 +108,8 @@ actions:
           #   will be 'Friday'.
           # Note: like the literal due date, this task will be considered floating
           relative:
-             to: tomorrow
-             direction: after
+            to: tomorrow
+            direction: after
         labels:
           name:
             - tmtdt
@@ -155,7 +160,7 @@ actions:
           #   resolved then the task will still be created, just not as a child task.
           #
           # If specifying by id, then the ID must be valid otherwise the ToDoist server will report an error!
-          name: 'Some Parent Task'
+          name: "Some Parent Task"
 
         # The lower the number, the higher up in the list it will be
         child_order: 8
@@ -176,7 +181,7 @@ actions:
           name:
             - tmtdt
         parent_task:
-          name: 'Some Parent Task'
+          name: "Some Parent Task"
 
         # Should be at the top ot the list
         child_order: 1
@@ -191,7 +196,7 @@ actions:
             - tmtdt
 
         parent_task:
-          name: 'Some Parent Task'
+          name: "Some Parent Task"
 
         # When two 'tasks' have the same child_order, todoist 'solves' the conflict by task creation time
         child_order: 1
@@ -207,7 +212,7 @@ actions:
             - tmtdt
 
         parent_task:
-          name: 'Some Parent Task'
+          name: "Some Parent Task"
 
         #The order of task. Defines the position of the task among all the tasks with the same parent_id
         child_order: 15

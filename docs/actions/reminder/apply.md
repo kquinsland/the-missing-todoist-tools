@@ -113,4 +113,4 @@ Only the `mutate` field is supported `option`.
 
 ### Examples
 
-See the [jobs/filter/apply.yaml](../../../jobs/v1/reminder/apply.yml) file.
+See the [jobs/reminder/00.apply.yaml](../../../jobs/v1/reminder/00.apply.yml) file.

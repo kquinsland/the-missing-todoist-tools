@@ -39,7 +39,6 @@ actions:
                 # remove the matching portion of the task title
                 mutate: Yes
 
-
   - name: absolute-reminder-team_lunch
     action: reminder_apply
     enabled: No
@@ -60,7 +59,7 @@ actions:
               option:
                 mutate: Yes
 
-  - name: relative-reminder-weely_coming
+  - name: relative-reminder-weekly_coming
     action: reminder_apply
     enabled: Yes
     description: >-

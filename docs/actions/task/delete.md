@@ -10,4 +10,4 @@ Just like delete except there's no properties. Either specify the explicit ID or
 
 ### Examples
 
-See the [jobs/project/apply.yaml](../../../jobs/v1/project/create.yaml) file for more.
+See the [jobs/tasks/02.delete.yaml](../../../jobs/v1/tasks/02.delete.yaml) file for more.

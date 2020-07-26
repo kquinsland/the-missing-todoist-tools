@@ -77,9 +77,4 @@ tmtdt.py [INFO     ] Execution of job://./jobs/v1/tasks/create.yaml complete. Go
 
 ### Examples
 
-See the [jobs/projecr/apply.yaml](../../../jobs/v1/project/create.yaml) file for more.
-
-
-```yaml
-
-```
+See the [jobs/task/01.reschedule.yaml](../../../jobs/v1/tasks/01.reschedule.yaml) file for more.
