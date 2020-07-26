@@ -11,15 +11,19 @@ actions:
       Creates a few labels for all tasks to be done @ a few distinct places
 
     labels:
+      # only the "name" of the label is *required*
       - label: "simple_label"
+
+      # But color and favorite tags can also be set
       - label: "at_work"
         color: RED
         favorite: Yes
 
       - label: "at_store"
-        color: 46
+        # Internally, the color is "number 46", but is also known as `MONA_LISA`
+        color: 46 # or use MONA_LISA
 
         # A label to indicate that tmtdt was here :)
       - label: "tmtdt"
-        color: HIBISCUS
+        color: HIBISCUS # AKA 30
         favorite: Yes

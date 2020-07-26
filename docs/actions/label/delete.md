@@ -16,20 +16,4 @@ As of now, only the `label.name` filter is supported.
 
 ### Examples
 
-See the [jobs/label/delete.yaml](../../../jobs/v1/label/delete.yaml) file.
-
-```yaml
-
-labels:
-  - from:
-      # The label known as `at_work` is identified by ID 2154807380
-      id: 2154807380
-
-  - from:
-      # This will delete any label that matches the regex `at_work`
-      filters:
-        - filter:
-            labels:
-              name:
-                match: 'at_work'
-```
+See the [jobs/label/02.delete.yaml](../../../jobs/v1/label/02.delete.yaml) file.

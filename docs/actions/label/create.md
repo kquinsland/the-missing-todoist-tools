@@ -26,22 +26,4 @@ Or one of the 19 names for the colors. Color names are in the [`tdt/defaults/col
 
 ### Examples
 
-See the [jobs/filter/apply.yaml](../../../jobs/v1/label/create.yaml) file.
-
-
-
-```yaml
-labels:
-  - label: "at_home"  # only the "name" of the label is *required* 
-  - label: "at_work"
-      color: RED
-      favorite: Yes
-
-  - label: "at_store"
-      color: 46 # Also known as MONA_LISA
-
-  # A label to indicate that tmtdt was here :)
-  - label: "tmtdt"
-      color: HIBISCUS # AKA 30
-      favorite: Yes
-```
+See the [jobs/filter/00.create.yaml](../../../jobs/v1/label/00.create.yaml) file.

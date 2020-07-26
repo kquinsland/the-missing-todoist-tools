@@ -19,24 +19,4 @@ At a minimum, each item in the `projects:` field must have:
 
 ### Examples
 
-See the [jobs/project/delete.yaml](../../../jobs/v1/project/delete.yaml) file for more.
-
-
-This will delete all projects that have a name matching this pattern: `Some Other $WORD Project $NUMBER`. Examples:
-
-- `Some Other Example Project 11`
-- `Some Other Testing Project 09`
-- `Some Other FooBarBaz Project 972899`
-
-
-```yaml
-projects:
-  - from:
-    # Supports specific ID, if known
-    # id: 2239209310
-    filters:
-      - filter:
-        projects:
-          name:
-            match: 'Some Other (\w*) Project \d$'
-```
+See the [jobs/project/02.delete.yaml](../../../jobs/v1/project/02.delete.yaml) file for more.

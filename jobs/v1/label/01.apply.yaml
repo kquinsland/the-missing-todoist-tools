@@ -20,7 +20,7 @@ actions:
           task:
             # ... ends in 'at work' or 'the office'
             content:
-              match: '(at work$|at the office$)'
+              match: "(at work$|at the office$)"
               option:
                 # Task title will change from "do thing at the office" to "do thing" w/ the label @at_work
                 mutate: Yes
@@ -29,9 +29,10 @@ actions:
           # ... is in this project
           projects:
             name:
-              match: 'Inbox'
+              match: "Inbox"
 
           regex_options:
+            # See: https://www.tutorialspoint.com/python/python_reg_expressions.htm
             # Ignore case so tasks like 'do thing AT OFFICE' will also be included :)
             - re.I
 
@@ -43,7 +44,6 @@ actions:
               match: 'at \w+ other place'
               option:
                 mutate: Yes
-
 
   - name: example-label_apply-never_due
     action: label_apply
@@ -66,8 +66,7 @@ actions:
           # ... is in this project
           projects:
             name:
-              match: 'Inbox'
-
+              match: "Inbox"
 
   - name: example-label_apply-over_due
     action: label_apply
@@ -89,7 +88,6 @@ actions:
                 # due BEFORE TODAY = overdue
                 direction: before
 
-
   - name: example-label_apply-next_quarter_1
     action: label_apply
     enabled: True
@@ -107,10 +105,9 @@ actions:
             date:
               explicit:
                 # Can also include a time: '2020-08-18T14:27:00-0700'
-                to: '2020-08-01'
+                to: "2020-08-01"
                 # after is *not* inclusive!
                 direction: after
-
 
   - name: example-label_apply-next_quarter_2
     action: label_apply
@@ -126,4 +123,4 @@ actions:
       - filter:
           labels:
             name:
-              match: 'prj_next_quarter'
+              match: "prj_next_quarter"

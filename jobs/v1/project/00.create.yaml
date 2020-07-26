@@ -22,10 +22,12 @@ actions:
       Creates a parent and child project. Shows use of color and favorite options
 
     projects:
+      # Explicitly create a project called `Some Test Project` in the root of TooDoist account w/ the color `MONA_LISA` applied
       - from:
           name: "Some Test Project"
         color: 46
 
+      # Create a project nested under the project `Some Test Project`
       - from:
           name: "Some Test Child Project"
         favorite: Yes
@@ -89,7 +91,9 @@ actions:
       - from:
           filters:
             - filter:
-                # Any task that...
+                # The '.' character is how you say 'ANY CHARACTER' with regex, so this filter will match
+                #   every task in your ToDoist account! Be VERY CAREFUL with this _especially_ when combining with the
+                #   delete option!!!
                 task:
                   content:
                     match: "."
@@ -97,9 +101,10 @@ actions:
                       delete: yes
 
                 projects:
-                  # ... is in this project
+                  # But because search results are combined with the boolean AND, we can strip out all the tasks that
+                  #   are not in this project!
                   name:
-                    match: 'Garage Sale 🏚️💵'
+                    match: "Garage Sale 🏚️💵"
 
         # New projects will be ROSE colored
         color: ROSE

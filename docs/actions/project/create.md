@@ -28,33 +28,12 @@ Or one of the 19 names for the colors. Color names are in the [`tdt/defaults/col
 
 ### Examples
 
-See the [jobs/projecr/apply.yaml](../../../jobs/v1/project/create.yaml) file for more.
+See the [jobs/project/00.create.yaml](../../../jobs/v1/project/00.create.yaml) file for more.
 
 
+The `action` with `name: example-project_create-filters_1` is an example of
+using filters to drive the name of projects and seed each project w/ a template.
 
-Explicitly create a project called `Some Test Project` in the root of TooDoist account w/ the color `MONA_LISA` applied
-```yaml
-
-projects:
-  - from:
-    name: "Some Test Project"
-  color: 46
-```
-
-Create a project nested under the project `Some Test Project`
-
-```yaml
-projects:
-  - from:
-    name: "Some Test Child Project"
-  favorite: Yes
-  parent:
-    # could also be specified by 'id' if known
-    #id: 123456789
-    project: Some Test Project
-```
-
-Use filters to drive the name of projects and seed each project w/ a template.
 Note: the `option:delete: Yes` line means that every task that is used to generate a project name will be deleted
 after the project is created.
 
@@ -66,32 +45,3 @@ Ultimately, the yaml below will:
 - Position the newly created project under the `Garage Sale 🏚️💵` project
 - 'seed' the new project with tasks taken from the `./templates/garage-sale.csv` file
 - Delete the task from the `Garage Sale 🏚️💵` project that named the newly created project 
-
-```yaml
-
-projects:
-  - from:
-    filters:
-      - filter:
-        # The '.' character is how you say 'ANY CHARACTER' with regex, so this filter will match
-        #   every task in your ToDoist account! Be VERY CAREFUL with this _especially_ when combining with the
-        #   delete option!!!
-          task:
-            content:
-              match: "."
-              option:
-                delete: yes
-
-          projects:
-          # But because search results are combined with the boolean AND, we can strip out all the tasks that
-          #   are not in this project!
-            name:
-              match: 'Garage Sale 🏚️💵'
-
-  color: ROSE
-  parent:
-    project: Garage Sale 🏚️💵
-
-  template:
-    file: ./templates/garage-sale.csv   
-```
