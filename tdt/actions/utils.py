@@ -609,4 +609,4 @@ def parse_regex_options(filter_obj: dict):
             _f = getattr(re, _regex_opt.split(".")[1])
             _reg_flags = _flags | _f
 
-    return _flags
+    return _reg_flags
